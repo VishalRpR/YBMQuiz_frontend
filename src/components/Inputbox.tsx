@@ -1,6 +1,5 @@
 export const Inputbox = ({
   lable,
-  placeholder,
   onChange,
   value
 }: {

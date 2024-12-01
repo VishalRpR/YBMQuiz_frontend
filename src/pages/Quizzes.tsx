@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Appbar } from "../components/Appbar";
+import { BACKEND_URL } from "../../config";
 
 const Quizzes = () => {
   const token = localStorage.getItem("token");
@@ -15,14 +16,11 @@ const Quizzes = () => {
       setLoading(true);
       setError(""); // Reset error message before each API call
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/v1/quizzes",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Replace with actual token
-            },
-          }
-        );
+        const response = await axios.get(`${BACKEND_URL}/api/v1/quizzes`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Replace with actual token
+          },
+        });
         setQuizzes(response.data.quizes); // Set fetched quizzes in state
       } catch (err) {
         setError("Failed to fetch quizzes.");

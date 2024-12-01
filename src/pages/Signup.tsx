@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Appbar } from "../components/Appbar";
 import { Input2box } from "../components/Input2box";
-import { Inputbox } from "../components/Inputbox";
 import { Primarybutton } from "../components/buttons/Primarybutton";
 import { useState } from "react";
 import axios from "axios";
+import { BACKEND_URL } from "../../config";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -67,7 +67,7 @@ export default function Signup() {
               type="big"
               onClick={async () => {
                 const response = await axios.post(
-                  "http://localhost:3000/api/v1/signup",
+                  `${BACKEND_URL}/api/v1/signup`,
                   {
                     name: name,
                     email: email,

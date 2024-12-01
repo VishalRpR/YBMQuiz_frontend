@@ -4,6 +4,7 @@ import { Primarybutton } from "../components/buttons/Primarybutton";
 import { Inputbox } from "../components/Inputbox";
 import axios from "axios";
 import { Appbar } from "../components/Appbar";
+import { BACKEND_URL } from "../../config";
 
 export const Quizview = () => {
   const token = localStorage.getItem("token");
@@ -28,14 +29,11 @@ export const Quizview = () => {
     }
 
     try {
-      await axios.delete(
-        `http://localhost:3000/api/v1/quiz/${quizId}/${questionId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await axios.delete(`${BACKEND_URL}/api/v1/quiz/${quizId}/${questionId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       fetchAllQuestions();
       alert("Question deleted successfully!");
     } catch (error) {
@@ -46,14 +44,11 @@ export const Quizview = () => {
 
   const fetchAllQuestions = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:3000/api/v1/quiz/${quizId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`${BACKEND_URL}/api/v1/quiz/${quizId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setAllquestion(response.data.question);
     } catch (error) {
       console.error("Error fetching questions:", error);
@@ -69,7 +64,7 @@ export const Quizview = () => {
 
     try {
       await axios.post(
-        `http://localhost:3000/api/v1/quiz/${quizId}`,
+        `${BACKEND_URL}/api/v1/quiz/${quizId}`,
         {
           text: questionText,
           options,
@@ -101,7 +96,7 @@ export const Quizview = () => {
 
     try {
       await axios.put(
-        `http://localhost:3000/api/v1/quiz/${quizId}/${selectedQuestionId}`,
+        `${BACKEND_URL}/api/v1/quiz/${quizId}/${selectedQuestionId}`,
         {
           text: questionText,
           options,
