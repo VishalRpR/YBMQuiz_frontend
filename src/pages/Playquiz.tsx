@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { Appbar } from "../components/Appbar";
+import { BACKEND_URL } from "../../config";
 
 export const Playquiz = () => {
   const token = localStorage.getItem("token");
@@ -23,7 +24,7 @@ export const Playquiz = () => {
       setError("");
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/v1/quizzes/${quizId}`,
+          `${BACKEND_URL}/api/v1/quizzes/${quizId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -46,7 +47,7 @@ export const Playquiz = () => {
   const postResponse = async (questionId: string, selectedOptionId: string) => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/api/v1/quizzes/${quizId}`,
+        `${BACKEND_URL}/api/v1/quizzes/${quizId}`,
         {
           questionId,
           markId: markid,
@@ -78,7 +79,7 @@ export const Playquiz = () => {
     try {
      
       await axios.post(
-        `http://localhost:3000/api/v1/marks/${quizId}`,
+        `${BACKEND_URL}/api/v1/marks/${quizId}`,
         {
           totalMarks: score,
           markid,

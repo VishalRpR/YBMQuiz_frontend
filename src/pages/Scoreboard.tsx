@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Appbar } from "../components/Appbar";
+import { BACKEND_URL } from "../../config";
 
 export const Scoreboard = () => {
    const token = localStorage.getItem("token");
@@ -14,7 +15,7 @@ export const Scoreboard = () => {
       setLoading(true);
       setError("");
       try {
-        const response = await axios.get("http://localhost:3000/api/v1/marks", {
+        const response = await axios.get(`${BACKEND_URL}/api/v1/marks`, {
           headers: {
             Authorization: `Bearer ${token}`, // Replace with your actual token
           },

@@ -1,5 +1,5 @@
 "use client";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Boxbutton } from "./buttons/Boxbutton";
 import { Primarybutton } from "./buttons/Primarybutton";
 

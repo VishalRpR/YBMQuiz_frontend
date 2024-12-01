@@ -3,6 +3,7 @@ import { Appbar } from "../components/Appbar";
 import { Primarybutton } from "../components/buttons/Primarybutton";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import {BACKEND_URL} from "../../config.ts"
 
 interface quiz {
   title: string;
@@ -21,7 +22,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     async function getQuiz() {
-      const quizes = await axios.get("http://localhost:3000/api/v1/quiz/", {
+      const quizes = await axios.get(`${BACKEND_URL}/api/v1/quiz/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -35,7 +36,7 @@ const Dashboard = () => {
   const handleCreateQuiz = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/quiz/",
+        `${BACKEND_URL}/api/v1/quiz/`,
         {
           title: quizTitle,
           description: quizDescription,
