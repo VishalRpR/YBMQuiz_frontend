@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Appbar } from "../components/Appbar";
 
 const Quizzes = () => {
+  const token = localStorage.getItem("token");
   const [quizzes, setQuizzes] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -17,7 +19,7 @@ const Quizzes = () => {
           "http://localhost:3000/api/v1/quizzes",
           {
             headers: {
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMyOTUwNzI3fQ.QZ7hFWtG6ZoVIgH28HPFcCz-gKXhFEWCBGIIRYGRINc`, // Replace with actual token
+              Authorization: `Bearer ${token}`, // Replace with actual token
             },
           }
         );
@@ -39,26 +41,30 @@ const Quizzes = () => {
   };
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">All Quizzes</h2>
-      {loading && <p>Loading quizzes...</p>}
-      {error && <p className="text-red-500">{error}</p>}
-      {quizzes.length === 0 && !loading && !error && (
-        <p>No quizzes available.</p>
-      )}
-      <div className="grid grid-cols-1 gap-4">
-        {quizzes.map((quiz) => (
-          <div key={quiz.id} className="border p-4 rounded-md shadow-md">
-            <h3 className="text-xl font-bold">{quiz.title}</h3>
-            <p>{quiz.description}</p>
-            <button
-              onClick={() => handleStartQuiz(quiz.id)} // Trigger navigate on button click
-              className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-            >
-              Start Quiz
-            </button>
-          </div>
-        ))}
+    <div>
+      <Appbar token={token} />
+
+      <div className="p-6">
+        <h2 className="text-2xl font-bold mb-4">All Quizzes</h2>
+        {loading && <p>Loading quizzes...</p>}
+        {error && <p className="text-red-500">{error}</p>}
+        {quizzes.length === 0 && !loading && !error && (
+          <p>No quizzes available.</p>
+        )}
+        <div className="grid grid-cols-1 gap-4">
+          {quizzes.map((quiz) => (
+            <div key={quiz.id} className="border p-4 rounded-md shadow-md">
+              <h3 className="text-xl font-bold">{quiz.title}</h3>
+              <p>{quiz.description}</p>
+              <button
+                onClick={() => handleStartQuiz(quiz.id)} // Trigger navigate on button click
+                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              >
+                Start Quiz
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
