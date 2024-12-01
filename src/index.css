@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #fffdf9;
+}
+@font-face {
+  font-family: "Inter Latin";
+  src: url("./fonts/Inter-Latin.ttf") format("truetype");
+}
+
+body {
+  font-family: "Inter Latin";
+}
