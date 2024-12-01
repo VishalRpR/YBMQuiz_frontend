@@ -12,6 +12,7 @@ interface quiz {
 }
 
 const Dashboard = () => {
+  const token=localStorage.getItem("token")
   const navigate = useNavigate();
   const [allquizes, setAllquizes] = useState<quiz[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -22,10 +23,10 @@ const Dashboard = () => {
     async function getQuiz() {
       const quizes = await axios.get("http://localhost:3000/api/v1/quiz/", {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMyOTUwNzI3fQ.QZ7hFWtG6ZoVIgH28HPFcCz-gKXhFEWCBGIIRYGRINc`,
+          Authorization: `Bearer ${token}`,
         },
       });
-      console.log(quizes.data);
+    
       setAllquizes(quizes.data.quizes);
     }
     getQuiz();
@@ -41,11 +42,11 @@ const Dashboard = () => {
         },
         {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMyOTUwNzI3fQ.QZ7hFWtG6ZoVIgH28HPFcCz-gKXhFEWCBGIIRYGRINc`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
-      console.log(response.data); // Log the response from API
+     
       setAllquizes((prevQuizes) => [
         ...prevQuizes,
         {
@@ -63,7 +64,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <Appbar />
+      <Appbar token={token} />
       <div className="flex justify-center gap-5 items-center">
         <div className="text-3xl font-extrabold text-center py-9">
           Make your own Quiz

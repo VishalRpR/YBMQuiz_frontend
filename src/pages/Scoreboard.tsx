@@ -3,6 +3,7 @@ import axios from "axios";
 import { Appbar } from "../components/Appbar";
 
 export const Scoreboard = () => {
+   const token = localStorage.getItem("token");
   const [marks, setMarks] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
@@ -15,7 +16,7 @@ export const Scoreboard = () => {
       try {
         const response = await axios.get("http://localhost:3000/api/v1/marks", {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMyOTUwNzI3fQ.QZ7hFWtG6ZoVIgH28HPFcCz-gKXhFEWCBGIIRYGRINc`, // Replace with your actual token
+            Authorization: `Bearer ${token}`, // Replace with your actual token
           },
         });
 
@@ -45,7 +46,7 @@ export const Scoreboard = () => {
 
   return (
     <div>
-      <Appbar />
+      <Appbar token={token} />
 
       <div className="flex p-6">
         {/* Left side - Scoreboard */}
