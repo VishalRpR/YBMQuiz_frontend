@@ -3,11 +3,5 @@ https://www.loom.com/share/5dc61feb06414e03a722545c283ef6ca?sid=5a156ba7-09be-40
 
 
 Deployed Link
-https://ybm-quiz-frontend-atta.vercel.app/
+{{https://ybm-quiz-frontend-atta.vercel.app/}}
 
-![image](https://github.com/user-attachments/assets/151faeb9-c32c-4d75-a7dd-8997bb88412d)
-
-
-
-
-![image](https://github.com/user-attachments/assets/ad927558-a6d7-42db-b7c6-dd67771d53a4)
